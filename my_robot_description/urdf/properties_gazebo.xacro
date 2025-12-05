@@ -4,13 +4,20 @@
 
   <gazebo reference="base_link">
     <material>Gazebo/Blue</material>
+    <mu1 value ="0.1"/>
+    <mu2 value = "0.1"/>
   </gazebo>
+
   <gazebo reference="right_wheel_link">
     <material>Gazebo/Black</material>
+    <mu1 value ="0.1"/>
+    <mu2 value = "0.1"/>
   </gazebo>
 
   <gazebo reference="left_wheel_link">
     <material>Gazebo/Black</material>
+    <mu1 value ="0.1"/>
+    <mu2 value = "0.1"/>
   </gazebo>
 
 
@@ -26,7 +33,11 @@
     <mu2 value = "0.1"/>
   </gazebo>
 
-
+  <gazebo reference="lidar_link">
+    <material>Gazebo/Green</material>
+    <mu1 value ="0.1"/>
+    <mu2 value = "0.1"/>
+  </gazebo>
 
   <gazebo>
      <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">

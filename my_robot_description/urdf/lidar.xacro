@@ -1,0 +1,46 @@
+<?xml version='1.0'?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="lidar_radius" value="0.08"/>
+    <xacro:property name="lidar_length" value="0.05"/>
+
+    <link name = "lidar_link" >
+            <visual>
+                <origin xyz = "0 0 0" rpy = "0 0 0"/>
+                <geometry>
+                    <cylinder radius = "${lidar_radius}" length = "${lidar_length}"/>
+                </geometry>
+                <material name="green"/>
+            </visual>
+            <collision>
+                <origin xyz = "0 0 0" rpy = "0 0 0 "/>
+                <geometry>
+                    <cylinder radius = "${lidar_radius}" length = "${lidar_length}"/>
+                </geometry>
+            </collision>
+             <xacro:cylinder_inertia m="0.2" r = "${2*lidar_radius}" 
+                                             l ="${2*lidar_length}" 
+                                             xyz = "0 0 0"
+                                             rpy = "0 0 0" />
+        </link>
+
+        <joint name="base_to_lidar_joint" type="fixed">
+            <parent link="base_link"/>
+            <child link="lidar_link"/>
+            <origin xyz="0 0 0.12"/>
+        </joint>
+
+
+        <gazebo reference = "lidar_link">
+        <sensor name = "lidar_sensor" type = "ray">
+            <pose> 0 0 0 0 0 0 </pose>
+            <visualize>true</visualize>
+            <update_rate>10.0</update_rate>
+            <plugin name="lidar_controller" filename="libgazebo_ros_ray_sensor.so">
+                <frameName>camera_link</frameName>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+
+</robot>
